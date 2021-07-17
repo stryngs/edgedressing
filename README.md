@@ -113,3 +113,6 @@ python3 poc_open.py -i wlan1mon --rtrip 192.168.40.1 --rtrmac aa:bb:cc:dd:ee:fe 
 
 ### Food for thought
 edgedressing does not need to reside on the wireless LAN of the target.  With modifications to the code a user would be able to direct targets to a non-RFC1918 address.
+
+### Privacy implications
+During testing it was noted that the affected node sent a GET request to www.msftconnecttest.com every thirty seconds.  Whether the user wants to or not, they let Microsoft know where they are just by virtue of connecting to an Access Point.
