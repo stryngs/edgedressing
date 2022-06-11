@@ -74,10 +74,10 @@ Microsoft does not recommend disabling the NCSI probes. Several operating system
 WPA or WEP
 ```
 airtun-ng -a <BSSID> -e <ESSID> -p <PSK> <Monitoring NIC>
-python3 ./poc.py -i at0 -m at0 --tun --injection payloads/demo
+python3 ./poc.py -i at0 -m at0 --tun --injection payloads/demo --trigger "connecttest"
 ```
 
 Open
 ```
-python3 ./poc.py -i <Injecting NIC> -m <Monitoring NIC> --injection payloads/demo
+python3 ./poc.py -i <Injecting NIC> -m <Monitoring NIC> --injection payloads/demo --trigger "connecttest"
 ```
