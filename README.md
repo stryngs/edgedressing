@@ -2,6 +2,7 @@
 # edgedressing
 One day while experimenting with airpwn-ng, I noticed unexpected GET requests on the target node.  The node in question happened to be a Windows 10 laptop and every time it would connect to the AP a GET request was made.  Using [scapy](https://scapy.net/)  I was able to make the Edge browser open up and proceed to a URL of my choosing upon connecting to a wireless access point.
 
+## NCSI fun
 Enter NCSI probing, by Microsoft.
 
 https://docs.microsoft.com/en-us/troubleshoot/windows-client/networking/internet-explorer-edge-open-connect-corporate-public-network
@@ -82,3 +83,6 @@ Open
 ```
 python3 ./poc.py -i <Injecting NIC> -m <Monitoring NIC> --injection payloads/demo --trigger "connecttest"
 ```
+
+## Research material
+`dressed.pcap` is a trimmed down pcap showing the lifecycle of how NCSI probing can be abused by way of HTTP; [CVE-2024-30078](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-30078) will be interesting for sure.
