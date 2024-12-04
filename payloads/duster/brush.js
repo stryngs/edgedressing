@@ -4,6 +4,8 @@ Features included in this script:
 - GeoLocation: Collects latitude, longitude, and accuracy of the user's location.
 - Permissions: Checks the state of permissions for geolocation, camera, microphone, etc.
 - General Information: Gathers User-Agent, platform, vendor, and product details.
+- Hardware Concurrency: Retrieves the number of logical processors available to the browser.
+- Browser Plugins: Lists installed browser plugins.
 - Screen and Display: Retrieves screen resolution, color depth, and pixel ratio.
 - Browser Features: Detects capabilities like WebAssembly, Service Workers, etc.
 - Storage: Inspects localStorage, sessionStorage, and total/used storage quota.
@@ -37,6 +39,21 @@ const audioOptions = {
         data.platform = navigator.platform;
         data.vendor = navigator.vendor;
         data.product = navigator.product;
+
+        // Hardware Concurrency
+        const cores = navigator.hardwareConcurrency;
+        console.log('Number of CPU Cores:', cores);
+        data.hardwareConcurrency = cores;
+
+        // Browser Plugins
+        try {
+            const plugins = Array.from(navigator.plugins).map(plugin => plugin.name);
+            data.plugins = plugins;
+            console.log('Browser Plugins:', plugins);
+        } catch (error) {
+            data.plugins = "Unable to retrieve plugins.";
+            console.error("Error retrieving plugins:", error);
+        }
 
         // Screen and Display Information
         data.screenResolution = `${window.screen.width}x${window.screen.height}`;
