@@ -4,3 +4,6 @@ buster is a template example for attempting to collect clipboard content, userna
 If cluster or duster are listening buster leverages a hidden iframe and the server cluster/duster is listening on will receive the fingerprint info.
 
 As more payloads get added they will be chained if buster is used.  If chaining for buster is not wanted simply find the iframes in index.html and comment out accordingly.
+
+## How
+ChatGPT and live testing feedback to the prompt.
